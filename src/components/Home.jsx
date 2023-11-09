@@ -30,7 +30,7 @@ export const Home = () => {
       <main>
         <ul>
           {pokemons &&
-            pokemons.map((pokemon, index) => (
+            pokemons.map((pokemon) => (
               <li key={pokemon.name}>
                 <Link to={`/pokemon/${pokemon.name}`}>{pokemon.name}</Link>
               </li>

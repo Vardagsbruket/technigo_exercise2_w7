@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 export const Details = () => {
   const [pokemon, setPokemon] = useState(null);
   const { name } = useParams();
+  const params = useParams();
+  console.log(params);
+  console.log(name);
 
   const fetchPokemon = async () => {
     const apiPokemon = `https://pokeapi.co/api/v2/pokemon/${name}`;
@@ -12,8 +15,8 @@ export const Details = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          setPokemon(data.results);
-          console.log(data.results);
+          console.log(data);
+          setPokemon(data);
         } else {
           throw new Error("Couldn't fetch the API data");
         }
@@ -25,9 +28,14 @@ export const Details = () => {
     fetchPokemon();
   }, []);
 
-  //   if(name) {
-  //     console.log(name);
-  //   }
+  if (!pokemon) {
+    return <div>No pokemon found.</div>;
+  }
 
-  return <div>Hello</div>;
+  return (
+    <div>
+      <p>Details</p>
+      {pokemon.name}
+    </div>
+  );
 };
